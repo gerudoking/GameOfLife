@@ -159,9 +159,15 @@ public class GameEngine {
 			if(a < 0){
 				a = height - a;
 			}
+			if(a > height){
+				a = a - height;
+			}
 			for (int b = j - 1; b <= j + 1; b++) {
 				if(b < 0){
 					b = width - b;
+				}
+				if(b > width){
+					b = b - width;
 				}
 				if (validPosition(a, b)  && (!(a==i && b == j)) && cells[a][b].isAlive()) {
 					alive++;
