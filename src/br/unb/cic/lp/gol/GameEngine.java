@@ -156,21 +156,34 @@ public class GameEngine {
 	private int numberOfNeighborhoodAliveCells(int i, int j) {
 		int alive = 0;
 		for (int a = i - 1; a <= i + 1; a++) {
-			if(a < 0){
-				a = height - a;
-			}
-			if(a > height){
-				a = a - height;
-			}
 			for (int b = j - 1; b <= j + 1; b++) {
-				if(b < 0){
-					b = width - b;
-				}
-				if(b > width){
-					b = b - width;
-				}
 				if (validPosition(a, b)  && (!(a==i && b == j)) && cells[a][b].isAlive()) {
 					alive++;
+				}
+				
+				if(a < 0){
+					if(b < 0){
+						if (validPosition(height - a, width - b)  && (!(a==i && b == j)) && cells[height - a][width - b].isAlive()) {
+							alive++;
+						}
+					}
+					if(b > width){
+						if (validPosition(height - a, b - width)  && (!(a==i && b == j)) && cells[height - a][b - width].isAlive()) {
+							alive++;
+						}
+					}
+				}
+				if(a > height){
+					if(b < 0){
+						if (validPosition(a - height, width - b)  && (!(a==i && b == j)) && cells[a - height][width - b].isAlive()) {
+							alive++;
+						}
+					}
+					if(b > width){
+						if (validPosition(a - height, b - width)  && (!(a==i && b == j)) && cells[a - height][b - width].isAlive()) {
+							alive++;
+						}
+					}
 				}
 			}
 		}
