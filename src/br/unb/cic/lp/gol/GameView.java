@@ -16,7 +16,8 @@ public class GameView {
 	private static final int INVALID_OPTION = 0;
 	private static final int MAKE_CELL_ALIVE = 1;
 	private static final int NEXT_GENERATION = 2;
-	private static final int HALT = 3; 
+	private static final int HALT = 3;
+	private static final int UNDO = 4;
 
 	private GameEngine engine;
 	private GameController controller;
@@ -56,6 +57,7 @@ public class GameView {
 			System.out.println("[1] Make a cell alive");
 			System.out.println("[2] Next generation");
 			System.out.println("[3] Halt");
+			System.out.println("[4] Undo");
 		
 			System.out.print("\n \n Option: ");
 			
@@ -65,7 +67,8 @@ public class GameView {
 		switch(option) {
 			case MAKE_CELL_ALIVE : makeCellAlive(); break;
 			case NEXT_GENERATION : nextGeneration(); break;
-			case HALT : halt();
+			case HALT : halt() break;
+			case UNDO : fazer_undo() break;
 		}
 	}
 	
