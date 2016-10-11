@@ -156,7 +156,13 @@ public class GameEngine {
 	private int numberOfNeighborhoodAliveCells(int i, int j) {
 		int alive = 0;
 		for (int a = i - 1; a <= i + 1; a++) {
+			if(a < 0){
+				a = height - a;
+			}
 			for (int b = j - 1; b <= j + 1; b++) {
+				if(b < 0){
+					b = width - b;
+				}
 				if (validPosition(a, b)  && (!(a==i && b == j)) && cells[a][b].isAlive()) {
 					alive++;
 				}
