@@ -163,19 +163,19 @@ public class GameEngine {
 				
 				if(a < 0){
 					if(b < 0){
-						if (validPosition(height - a, width - b)  && (!(a==i && b == j)) && cells[height - a][width - b].isAlive()) {
+						if (validPosition(height + a, width + b)  && (!(a==i && b == j)) && cells[height + a][width - +].isAlive()) {
 							alive++;
 						}
 					}
 					if(b > width){
-						if (validPosition(height - a, b - width)  && (!(a==i && b == j)) && cells[height - a][b - width].isAlive()) {
+						if (validPosition(height + a, b - width)  && (!(a==i && b == j)) && cells[height + a][b - width].isAlive()) {
 							alive++;
 						}
 					}
 				}
 				if(a > height){
 					if(b < 0){
-						if (validPosition(a - height, width - b)  && (!(a==i && b == j)) && cells[a - height][width - b].isAlive()) {
+						if (validPosition(a - height, width + b)  && (!(a==i && b == j)) && cells[a - height][width + b].isAlive()) {
 							alive++;
 						}
 					}
