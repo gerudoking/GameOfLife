@@ -11,7 +11,7 @@ public class CellButton extends JButton{
 	
 	private GameController controller;
 	
-	public CellButton(final int i, final int j, GameController controller){
+	public CellButton(final int i, final int j, GameController controller, GameEngine engine){
 		super(" ");
 		this.setBackground(Color.BLACK);
 		

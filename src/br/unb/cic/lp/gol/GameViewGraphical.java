@@ -11,14 +11,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class GameViewGraphical extends JFrame{
+	private int numberOfGen = 1;
+	
 	private Container contentPane;
 	
 	private JPanel painelDaMatriz;
 	private JPanel painelDeOpcoes;
+	private JPanel painelAutomatic;
 	
 	private CellButton[][] celulas;
 	
 	private JButton automatic;
+	private JButton automaticPlus;
+	private JButton automaticSub;
 	private JButton nextGeneration;
 	private JButton halt;
 	private JButton undo;
@@ -36,15 +41,19 @@ public class GameViewGraphical extends JFrame{
 		
 		painelDaMatriz = new JPanel();
 		painelDeOpcoes = new JPanel();
+		painelAutomatic = new JPanel();
 		
 		contentPane.setLayout(new BorderLayout(5, 5));
 		painelDaMatriz.setLayout(new GridLayout(engine.getHeight(), engine.getWidth()));
 		painelDeOpcoes.setLayout(new GridLayout(1, 4));
+		painelAutomatic.setLayout(new GridLayout(1, 3));
 		
 		contentPane.add(painelDaMatriz, BorderLayout.CENTER);
 		contentPane.add(painelDeOpcoes, BorderLayout.SOUTH);
 		
-		automatic = new JButton("Automatic");
+		automatic = new JButton("GA: " + numberOfGen + ".");
+		automaticPlus = new JButton("+");
+		automaticSub = new JButton("-");
 		nextGeneration = new JButton("Next Generation");
 		halt = new JButton("Halt");
 		undo = new JButton("Undo");
@@ -53,7 +62,7 @@ public class GameViewGraphical extends JFrame{
 		
 		for(int i = 0; i < engine.getHeight(); i++){
 			for(int j = 0; j < engine.getWidth(); j++){
-				celulas[i][j] = new CellButton(i, j, controller);
+				celulas[i][j] = new CellButton(i, j, controller, engine);
 				painelDaMatriz.add(celulas[i][j]);
 			}
 		}
@@ -61,6 +70,18 @@ public class GameViewGraphical extends JFrame{
 		automatic.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				automatic();
+			}
+		});
+		
+		automaticPlus.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				automaticPlus();
+			}
+		});
+		
+		automaticSub.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				automaticSub();
 			}
 		});
 		
@@ -82,11 +103,16 @@ public class GameViewGraphical extends JFrame{
 			}
 		});
 		
-		painelDeOpcoes.add(automatic);
+		painelDeOpcoes.add(painelAutomatic);
 		painelDeOpcoes.add(nextGeneration);
 		painelDeOpcoes.add(halt);
 		painelDeOpcoes.add(undo);
 		
+		painelAutomatic.add(automaticPlus);
+		painelAutomatic.add(automatic);
+		painelAutomatic.add(automaticSub);
+		
+		this.setSize(1000, 600);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
@@ -106,6 +132,16 @@ public class GameViewGraphical extends JFrame{
 	
 	private void automatic(){
 		//controller.automaticGeneration();
+	}
+	
+	private void automaticPlus(){
+		numberOfGen++;
+		automatic.setText("GA: " + numberOfGen + ".");
+	}
+	
+	private void automaticSub(){
+		if (numberOfGen > 1) numberOfGen--;
+		automatic.setText("GA: " + numberOfGen + ".");
 	}
 	
 	private void nextGeneration(){
