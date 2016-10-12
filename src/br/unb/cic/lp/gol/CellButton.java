@@ -10,23 +10,31 @@ import javax.swing.JButton;
 public class CellButton extends JButton{
 	
 	private GameController controller;
+	private GameEngine engine;
 	
-	public CellButton(final int i, final int j, GameController controller, GameEngine engine){
+	public CellButton(final int i, final int j, GameController controller, final GameEngine engine){
 		super(" ");
 		this.setBackground(Color.BLACK);
 		
+		this.controller = controller;
+		this.engine = engine;
+		
 		this.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				makeCellAlive(i, j);
+				if(!(engine.isCellAlive(i, j))) makeCellAlive(i, j);
+				else makeCellDead(i, j);
 			}
 		});
-		
-		this.controller = controller;
 	}
 	
 	public void makeCellAlive(int i, int j){
 		this.setBackground(Color.RED);
 		controller.makeCellAlive(i, j);
+	}
+	
+	public void makeCellDead(int i, int j){
+		this.setBackground(Color.BLACK);
+		controller.makeCellDead(i, j);
 	}
 	
 	public void corRed(){
