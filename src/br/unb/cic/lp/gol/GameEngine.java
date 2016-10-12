@@ -3,7 +3,7 @@ package br.unb.cic.lp.gol;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.EmptyStackException;
 /**
  * Representa um ambiente (environment) do jogo GameOfLife.
  * 
@@ -21,7 +21,7 @@ public class GameEngine {
 	private int width;
 	private Cell[][] cells;
 	private Statistics statistics;
-
+	protected ArrayList<Cell[][]> mapas_passados;
 	/**
 	 * Construtor da classe Environment.
 	 * 
@@ -41,7 +41,7 @@ public class GameEngine {
 				cells[i][j] = new Cell();
 			}
 		}
-		
+		this.mapas_passados= new ArrayList<Cell[][]>();
 		this.statistics = statistics;
 	}
 
@@ -57,6 +57,23 @@ public class GameEngine {
 	 * 
 	 * c) em todos os outros casos a celula morre ou continua morta.
 	 */
+	public void salvar_mapa(Cell[][] mapa){
+		mapas_passados.add(mapa);
+	}
+	
+	public void fazer_undo(){
+		Cell[][] mapa_a_pegar = new Cell[height][width];
+		try{
+			mapa_a_pegar = mapas_passados.get(mapas_passados.size()-1);
+		}
+
+		catch(EmptyStackException a){
+			System.err.println("Tried to undo when no maps were saved");	
+		}
+		cells=mapa_a_pegar;
+		mapas_passados.remove(mapas_passados.size()-1);
+	}
+	
 	public void nextGeneration() {
 		List<Cell> mustRevive = new ArrayList<Cell>();
 		List<Cell> mustKill = new ArrayList<Cell>();
@@ -80,6 +97,7 @@ public class GameEngine {
 			cell.kill();
 			statistics.recordKill();
 		}
+		salvar_mapa(cells);
 	}
 	
 	/**

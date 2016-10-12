@@ -17,7 +17,8 @@ public class GameView {
 	private static final int MAKE_CELL_ALIVE = 1;
 	private static final int NEXT_GENERATION = 2;
 	private static final int AUTO_GENERATION = 3;
-	private static final int HALT = 4; 
+	private static final int HALT = 4;
+	private static final int UNDO = 5;
 
 	private GameEngine engine;
 	private GameController controller;
@@ -58,7 +59,7 @@ public class GameView {
 			System.out.println("[2] Next generation");
 			System.out.println("[3] Automatic generation");
 			System.out.println("[4] Halt");
-		
+			System.out.println("[5] Undo");
 			System.out.print("\n \n Option: ");
 			
 			option = parseOption(s.nextLine());
@@ -69,6 +70,7 @@ public class GameView {
 			case NEXT_GENERATION : nextGeneration(); break;
 			case AUTO_GENERATION : AutomaticGeneration();break;
 			case HALT : halt();
+			case UNDO : fazer_undo(); break;
 		}
 	}
 	
@@ -91,6 +93,10 @@ public class GameView {
 	
 	private void nextGeneration() {
 		controller.nextGeneration();
+	}
+	
+	private void fazer_undo(){
+		controller.fazer_undo();
 	}
 	
 	private void AutomaticGeneration(){
