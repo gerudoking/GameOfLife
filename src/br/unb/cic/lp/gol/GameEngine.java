@@ -164,13 +164,13 @@ public class GameEngine {
 				if(a < 0){
 					auxA = height + a;
 				}
-				if(a => height){
+				if(a >= height){
 					auxA = a - height;
 				}
 				if(b < 0){
 					auxB = width + b;
 				}
-				if(b => width){
+				if(b >= width){
 					auxB = b - width;
 				}
 				if (validPosition(auxA, auxB)  && (!(a==i && b == j)) && cells[auxA][auxB].isAlive()) {
