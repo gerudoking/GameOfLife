@@ -38,7 +38,7 @@ public class GameViewGraphical extends JFrame{
 		painelDeOpcoes = new JPanel();
 		
 		contentPane.setLayout(new BorderLayout(5, 5));
-		painelDaMatriz.setLayout(new GridLayout(engine.getHeight(), engine.getWidth()));
+		painelDaMatriz.setLayout(new GridLayout(10, 10));
 		painelDeOpcoes.setLayout(new GridLayout(1, 4));
 		
 		contentPane.add(painelDaMatriz, BorderLayout.CENTER);
@@ -49,10 +49,10 @@ public class GameViewGraphical extends JFrame{
 		halt = new JButton("Halt");
 		undo = new JButton("Undo");
 		
-		celulas = new CellButton[engine.getHeight()][engine.getWidth()];
+		celulas = new CellButton[10][10];
 		
-		for(int i = 0; i < engine.getHeight(); i++){
-			for(int j = 0; j < engine.getWidth(); j++){
+		for(int i = 0; i < 10; i++){
+			for(int j = 0; j < 10; j++){
 				celulas[i][j] = new CellButton(i, j, controller);
 				painelDaMatriz.add(celulas[i][j]);
 			}
