@@ -131,7 +131,9 @@ public class GameViewGraphical extends JFrame{
 	}
 	
 	private void automatic(){
-		//controller.automaticGeneration();
+		for(int i = 0; i< numberOfGen; i++ ){
+			controller.nextGeneration();
+		}
 	}
 	
 	private void automaticPlus(){
