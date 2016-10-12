@@ -56,6 +56,16 @@ public class GameController {
 		}
 	}
 	
+	public void makeCellDead(int i, int j){
+		try {
+			engine.makeCellDead(i, j);
+			board.update();
+		}
+		catch(InvalidParameterException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
 	public void nextGeneration() {
 		engine.nextGeneration();
 		board.update();
