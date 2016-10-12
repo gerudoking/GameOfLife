@@ -9,7 +9,7 @@ public class Main {
 
 		GameEngine engine = new GameEngine(10, 10, statistics);	
 		
-		GameView board = new GameView(controller, engine);
+		GameViewGraphical board = new GameViewGraphical(controller, engine);
 		
 		controller.setBoard(board);
 		controller.setEngine(engine);
