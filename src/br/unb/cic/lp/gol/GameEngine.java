@@ -57,20 +57,34 @@ public class GameEngine {
 	 * 
 	 * c) em todos os outros casos a celula morre ou continua morta.
 	 */
-	public void salvar_mapa(Cell[][] mapa){
-		mapas_passados.add(mapa);
-	}
 	
+	
+	public void salvar_mapa(Cell[][] mapa){
+		mapas_passados.add(new Memento(mapa));
+	}
+	public boolean ta_vazio(){
+		return mapas_passados.isEmpty();
+	}
 	public void fazer_undo(){
-		Cell[][] mapa_a_pegar = new Cell[height][width];
+		Memento mapa_a_pegar = null;
 		try{
-			mapa_a_pegar = mapas_passados.get(mapas_passados.size()-1);
+			mapa_a_pegar = new Memento(mapas_passados.get(mapas_passados.size()-1));
 		}
 
 		catch(EmptyStackException a){
 			System.err.println("Tried to undo when no maps were saved");	
 		}
-		cells=mapa_a_pegar;
+		/*for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				if (mapa_a_pegar[i][j].isAlive()) {
+					cells[i][j].revive();
+				} 
+				else {
+					cells[i][j].kill();
+				}
+			}
+		}*/
+		cells=mapa_a_pegar.getMemento().clone();
 		mapas_passados.remove(mapas_passados.size()-1);
 	}
 	
