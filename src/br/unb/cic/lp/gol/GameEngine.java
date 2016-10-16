@@ -41,7 +41,7 @@ public class GameEngine {
 				cells[i][j] = new Cell();
 			}
 		}
-		this.mapas_passados= new ArrayList<Cell[][]>();
+		mapas_passados= new ArrayList<Cell[][]>();
 		this.statistics = statistics;
 	}
 
@@ -60,37 +60,46 @@ public class GameEngine {
 	
 	
 	public void salvar_mapa(Cell[][] mapa){
-		mapas_passados.add(new Memento(mapa));
+		Cell[][] a_salvar= new Cell[height][width];
+		
+		for(int i=0;i<height;i++){
+			for(int j=0;j<width;j++){
+				a_salvar[i][j]= new Cell();
+				if(cells[i][j].isAlive()){
+					a_salvar[i][j].revive();
+				}
+				else{ 
+					a_salvar[i][j].kill();
+				}
+			}
+		}
+		mapas_passados.add(a_salvar);
 	}
-	public boolean ta_vazio(){
-		return mapas_passados.isEmpty();
-	}
-	public void fazer_undo(){
-		Memento mapa_a_pegar = null;
+	
+	public void undo() throws EmptyStackException{
 		try{
-			mapa_a_pegar = new Memento(mapas_passados.get(mapas_passados.size()-1));
+			mapas_passados.get(mapas_passados.size()-1);
 		}
 
 		catch(EmptyStackException a){
 			System.err.println("Tried to undo when no maps were saved");	
 		}
-		/*for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width; j++) {
-				if (mapa_a_pegar[i][j].isAlive()) {
-					cells[i][j].revive();
-				} 
-				else {
-					cells[i][j].kill();
-				}
+		
+		for(int i=0;i<height;i++){
+			for(int j=0;j<width;j++){
+				if((mapas_passados.get(mapas_passados.size()-1)[i][j]).isAlive()) cells[i][j].revive();
+				else cells[i][j].kill();
 			}
-		}*/
-		cells=mapa_a_pegar.getMemento().clone();
+		}
+		
 		mapas_passados.remove(mapas_passados.size()-1);
 	}
 	
 	public void nextGeneration() {
 		List<Cell> mustRevive = new ArrayList<Cell>();
 		List<Cell> mustKill = new ArrayList<Cell>();
+		salvar_mapa();
+		
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				if (shouldRevive(i, j)) {
@@ -111,7 +120,6 @@ public class GameEngine {
 			cell.kill();
 			statistics.recordKill();
 		}
-		salvar_mapa(cells);
 	}
 	
 	/**
