@@ -70,8 +70,8 @@ public class GameController {
 		engine.nextGeneration();
 		board.update();
 	}
-	public void fazer_undo(){
-		engine.fazer_undo();
+	public void undo(){
+		engine.undo();
 		board.update();
 	}
 }
