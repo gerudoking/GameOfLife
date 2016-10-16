@@ -69,8 +69,8 @@ public class GameView {
 			case MAKE_CELL_ALIVE : makeCellAlive(); break;
 			case NEXT_GENERATION : nextGeneration(); break;
 			case AUTO_GENERATION : AutomaticGeneration();break;
-			case HALT : halt();
-			case UNDO : fazer_undo(); break;
+			case HALT : halt(); break;
+			case UNDO : undo(); break;
 		}
 	}
 	
@@ -95,8 +95,8 @@ public class GameView {
 		controller.nextGeneration();
 	}
 	
-	private void fazer_undo(){
-		controller.fazer_undo();
+	private void undo(){
+		controller.undo();
 	}
 	
 	private void AutomaticGeneration(){
