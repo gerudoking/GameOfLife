@@ -155,6 +155,6 @@ public class GameViewGraphical extends JFrame{
 	}
 	
 	private void undo(){
-		//controller.undo();
+		controller.undo();
 	}
 }
