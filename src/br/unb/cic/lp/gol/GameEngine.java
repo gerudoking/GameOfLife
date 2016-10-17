@@ -59,7 +59,7 @@ public class GameEngine {
 	 */
 	
 	
-	public void salvar_mapa(Cell[][] mapa){
+	public void salvar_mapa(){
 		Cell[][] a_salvar= new Cell[height][width];
 		
 		for(int i=0;i<height;i++){
