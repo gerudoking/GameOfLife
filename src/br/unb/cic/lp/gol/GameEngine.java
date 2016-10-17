@@ -81,8 +81,9 @@ public class GameEngine {
 			mapas_passados.get(mapas_passados.size()-1);
 		}
 
-		catch(EmptyStackException a){
-			System.err.println("Tried to undo when no maps were saved");	
+		catch(Exception a){
+			System.err.println("Tried to undo when no maps were saved");
+			return;
 		}
 		
 		for(int i=0;i<height;i++){
