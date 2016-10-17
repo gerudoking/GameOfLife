@@ -16,10 +16,10 @@ import java.util.EmptyStackException;
  * 
  * @author rbonifacio
  */
-public class GameEngine {
+public abstract class GameEngine {
 	private int height;
 	private int width;
-	private Cell[][] cells;
+	protected Cell[][] cells;
 	private Statistics statistics;
 	protected ArrayList<Cell[][]> mapas_passados;
 	/**
@@ -189,22 +189,16 @@ public class GameEngine {
 	}
 
 	/* verifica se uma celula deve ser mantida viva */
-	private boolean shouldKeepAlive(int i, int j) {
-		return (cells[i][j].isAlive())
-				&& (numberOfNeighborhoodAliveCells(i, j) == 2 || numberOfNeighborhoodAliveCells(i, j) == 3);
-	}
+	abstract protected boolean shouldKeepAlive(int i, int j);
 
 	/* verifica se uma celula deve (re)nascer */
-	private boolean shouldRevive(int i, int j) {
-		return (!cells[i][j].isAlive())
-				&& (numberOfNeighborhoodAliveCells(i, j) == 3);
-	}
+	abstract protected boolean shouldRevive(int i, int j);
 
 	/*
 	 * Computa o numero de celulas vizinhas vivas, dada uma posicao no ambiente
 	 * de referencia identificada pelos argumentos (i,j).
 	 */
-	private int numberOfNeighborhoodAliveCells(int i, int j) {
+	protected int numberOfNeighborhoodAliveCells(int i, int j) {
 		int alive = 0;
 		int auxA, auxB;
 		for (int a = i - 1; a <= i + 1; a++) {
