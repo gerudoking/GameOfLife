@@ -4,6 +4,7 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.EmptyStackException;
+
 /**
  * Representa um ambiente (environment) do jogo GameOfLife.
  * 

@@ -1,0 +1,20 @@
+===================================================
+=======Trabalho de Tecnicas de Programacao 1=======
+===================================================
+===================Game of Life====================
+===================================================
+
+*Componentes do grupo:
+	-Eduardo de Azevedo dos Santos 	14/0136967
+	-Rafael Cascardo Campos 	14/0159401
+	-Luiz Felipe Carvalho Duarte 	14/0151958
+
+*Para executar o projeto:
+	Abrir o projeto no Eclipse e executa-lo.
+Digitar a regra desejada, apertar enter, e entao
+utilizar a interface para reviver e matar celulas,
+pular geracoes e ativar a geracao automatica. Apertar
+botao 'Halt' para finalizar o programa.
+
+*Link para o github do projeto:
+	https://github.com/gerudoking/GameOfLife
